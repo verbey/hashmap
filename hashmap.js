@@ -20,6 +20,17 @@ class HashMap {
 
 	set(key, value) {
 		const index = this.hash(key);
-		this.buckets[index].push(value);
+		if (this.buckets[index].count === 0) this.buckets[index].push({ key: key, value: value });
+		else {
+			let nextNode = this.buckets[index].head;
+			while (nextNode !== null) {
+				if (nextNode.value.key === key) {
+					nextNode.value.value = value;
+					return;
+				}
+				nextNode = nextNode.nextNode;
+			}
+			this.buckets[index].push({ key: key, value: value });
+		}
 	}
 };
