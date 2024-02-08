@@ -33,4 +33,14 @@ class HashMap {
 			this.buckets[index].push({ key: key, value: value });
 		}
 	}
+
+	get(key) {
+		const index = this.hash(key);
+		let nextNode = this.buckets[index].head;
+		while (nextNode !== null) {
+			if (nextNode.value.key === key) return nextNode.value.value;
+			nextNode = nextNode.nextNode;
+		}
+		return null;
+	}
 };
