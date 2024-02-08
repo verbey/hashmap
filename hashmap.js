@@ -3,7 +3,7 @@ const LinkedList = require("./linkedlist.js");
 class HashMap {
 	constructor() {
 		this.buckets = [];
-		for (let i = 0; i < 16; i++) {
+		for (let i = 0; i < 31; i++) {
 			this.buckets[i] = new LinkedList();
 		}
 	}
@@ -16,5 +16,10 @@ class HashMap {
 		}
 
 		return hashCode;
+	}
+
+	set(key, value) {
+		const index = this.hash(key);
+		this.buckets[index].push(value);
 	}
 };
