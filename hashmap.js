@@ -80,6 +80,13 @@ class HashMap {
 		});
 		return length;
 	}
+
+	clear() {
+		this.buckets = [];
+		for (let i = 0; i < 16; i++) {
+			this.buckets[i] = new LinkedList();
+		}
+	}
 };
 
 module.exports = HashMap;;
