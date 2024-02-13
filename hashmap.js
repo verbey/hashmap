@@ -24,6 +24,12 @@ class HashMap {
 			throw new Error("Trying to access index out of bound");
 		}
 		this.buckets[index].push({ key: key, value: value });
+
+		if (this.length / this.buckets.length > 0.75) {
+			for (let i = this.buckets.length; i < this.buckets.length * 2; i++) {
+				this.buckets[i] = new LinkedList();
+			}
+		}
 	}
 
 	get(key) {
