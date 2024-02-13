@@ -87,6 +87,36 @@ class HashMap {
 			this.buckets[i] = new LinkedList();
 		}
 	}
+
+	keys() {
+		let keys = [];
+		this.buckets.forEach((bucket) => {
+			let nextNode = bucket.head;
+			if (nextNode) {
+				while (nextNode !== null) {
+					keys.push(nextNode.element.key);
+					nextNode = nextNode.nextNode;
+				}
+			}
+
+		});
+		return keys;
+	}
+
+	values() {
+		let values = [];
+		this.buckets.forEach((bucket) => {
+			let nextNode = bucket.head;
+			if (nextNode) {
+				while (nextNode !== null) {
+					values.push(nextNode.element.value);
+					nextNode = nextNode.nextNode;
+				}
+			}
+
+		});
+		return values;
+	}
 };
 
 module.exports = HashMap;;
