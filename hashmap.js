@@ -50,3 +50,5 @@ class HashMap {
 		return null;
 	}
 };
+
+module.exports = HashMap;
