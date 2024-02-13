@@ -19,36 +19,40 @@ class HashMap {
 	}
 
 	set(key, value) {
-		const index = this.hash(key);
+		const index = this.hash(key) % this.buckets.length;
 		if (index < 0 || index >= this.buckets.length) {
 			throw new Error("Trying to access index out of bound");
 		}
 		if (this.buckets[index].count === 0) this.buckets[index].push({ key: key, value: value });
 		else {
 			let nextNode = this.buckets[index].head;
-			while (nextNode !== null) {
-				if (nextNode.value.key === key) {
-					nextNode.value.value = value;
-					return;
+			if (nextNode) {
+				while (nextNode !== null) {
+					if (nextNode.value.key === key) {
+						nextNode.value.value = value;
+						return;
+					}
+					nextNode = nextNode.nextNode;
 				}
-				nextNode = nextNode.nextNode;
+				this.buckets[index].push({ key: key, value: value });
 			}
-			this.buckets[index].push({ key: key, value: value });
 		}
 	}
 
 	get(key) {
-		const index = this.hash(key);
+		const index = this.hash(key) % this.buckets.length;
 		if (index < 0 || index >= this.buckets.length) {
 			throw new Error("Trying to access index out of bound");
 		}
 		let nextNode = this.buckets[index].head;
-		while (nextNode !== null) {
-			if (nextNode.value.key === key) return nextNode.value.value;
-			nextNode = nextNode.nextNode;
+		if (nextNode) {
+			while (nextNode !== null) {
+				if (nextNode.value.key === key) return nextNode.value.value;
+				nextNode = nextNode.nextNode;
+			}
 		}
 		return null;
 	}
 };
 
-module.exports = HashMap;
+module.exports = HashMap;;
