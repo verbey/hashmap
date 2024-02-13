@@ -72,6 +72,14 @@ class HashMap {
 			return false;
 		}
 	}
+
+	length() {
+		let length = 0;
+		this.buckets.forEach((bucket) => {
+			length += bucket.count();
+		});
+		return length;
+	}
 };
 
 module.exports = HashMap;;
