@@ -85,10 +85,11 @@ class LinkedList {
 							this.tail = null;
 						}
 					}
-					break;
+					return true;
 				}
 				nextNode = nextNode.nextNode;
 			}
+			return false;
 		}
 	}
 
