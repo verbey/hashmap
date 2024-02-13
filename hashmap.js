@@ -55,6 +55,23 @@ class HashMap {
 		}
 		return false;
 	}
+
+	remove(key) {
+		const index = this.hash(key) % this.buckets.length;
+		if (index < 0 || index >= this.buckets.length) {
+			throw new Error("Trying to access index out of bound");
+		}
+		let nextNode = this.buckets[index].head;
+		if (nextNode) {
+			while (nextNode !== null) {
+				if (nextNode.element.key === key) {
+					this.buckets[index].delete(nextNode.element);
+					return true;
+				}
+			}
+			return false;
+		}
+	}
 };
 
 module.exports = HashMap;;
